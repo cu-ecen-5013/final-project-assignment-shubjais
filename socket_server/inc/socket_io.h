@@ -52,9 +52,7 @@ typedef struct node
 	SLIST_ENTRY(node) nodes;
 }node_t;
 
-#ifndef USE_AESD_CHAR_DEVICE
 pthread_mutex_t lock;
-#endif
 /*---------------------------------------------------------------------------------------*/
 /*----------------------------------Function Definitions---------------------------------*/
 int socket_io(int sock_fd, int backlog);
