@@ -5,7 +5,7 @@
  *Modified Date	:
  *Result/Return	:
  *Course	: Fall-2019|ECEN-5013|AESD|Final-Project
- *Referneces	: 
+ *Referneces	: Assignments 5 & 6 
 ------------------------------------------------------------------------------------------*/
 /*------------------------------Preprocessor Statements----------------------------------*/
 #include <arpa/inet.h>

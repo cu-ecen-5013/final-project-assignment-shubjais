@@ -6,7 +6,7 @@
  *Result/Return	:
  *Course	: Fall-2019|ECEN-5013|AESD|Final-Project
  *Referneces	: https://stackoverflow.com/questions/1543466/how-do-i-change-a-tcp-socket-to-be-non-blocking
- *
+ *		: Assignments 5 & 6
 ------------------------------------------------------------------------------------------*/
 /*------------------------------Preprocessor Statements----------------------------------*/
 #include "../inc/socket.h"
