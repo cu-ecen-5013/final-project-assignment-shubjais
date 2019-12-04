@@ -47,7 +47,7 @@ int main(int argc, char *argv[])
 
     if (argc != 2) {
         fprintf(stderr,"usage: client hostname\n");
-        exit(1);
+        exit(EXIT_FAIL);
     }
 
     memset(&hints, 0, sizeof hints);
