@@ -19,7 +19,7 @@
 #include <fcntl.h>
 #include <assert.h>
 
-#define I2C_BUS       "/dev/i2c-1"
+#define I2C_BUS       "/dev/i2c-2"
 #define TMP102_ADDR   0x48
 
 #define EXIT_FAIL     -1
