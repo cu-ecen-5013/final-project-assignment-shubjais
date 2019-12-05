@@ -1,29 +1,13 @@
 /**
-*   @file : client-socket.c
+*   @file : client_socket.c
 *   @function : create a client for socket communication over port    
 *
 *   @author : Ayush Dhoot
 *   @references : https://beej.us/guide/bgnet/html/#client-server-background
 **/
 
-#include <stdio.h>
-#include <stdlib.h>
-#include <unistd.h>
-#include <errno.h>
-#include <string.h>
-#include <netdb.h>
-#include <sys/types.h>
-#include <netinet/in.h>
-#include <sys/socket.h>
-#include <arpa/inet.h>
-#include <syslog.h>
-
-#define PORT "9000" // the port client will be connecting to 
-
-#define MAXSIZE 1000 // max number of bytes we can get at once 
-
-#define EXIT_FAIL -1    //error code
-
+#include "client_socket.h"
+#include "tempsens.h"
 
 // get sockaddr, IPv4 or IPv6:
 void *get_in_addr(struct sockaddr *sa)
@@ -94,25 +78,35 @@ int main(int argc, char *argv[])
 
     freeaddrinfo(servinfo); // all done with this structure
 
-    BUF = "Hello! Client here :)";
-    len = strlen(BUF);
+    while(1) {
+    //BUF = "Hello! Client here :)";
+        temp_raw = temp_sensor_data();
 
-    if ((numbytes = send(sockfd, BUF, len, 0)) == -1) {
-        perror("send");
-        syslog(LOG_ERR, "client: send");
-        exit(EXIT_FAIL);
+        C = temp_raw*0.0625;
+        F = (1.8 * C) + 32;
+
+        sprintf(buf,"Temperature in F:%f and in C: %f\n", F, C);
+        
+        len = strlen(buf);
+
+        if ((numbytes = send(sockfd, BUF, len, 0)) == -1) {
+            perror("send");
+            syslog(LOG_ERR, "client: send");
+            exit(EXIT_FAIL);
+            }
+
+        if ((numbytes = recv(sockfd, buf, MAXSIZE-1, 0)) == -1) {
+            perror("recv");
+            syslog(LOG_ERR, "client: recv");
+            exit(EXIT_FAIL);
         }
 
-    if ((numbytes = recv(sockfd, buf, MAXSIZE-1, 0)) == -1) {
-        perror("recv");
-        syslog(LOG_ERR, "client: recv");
-        exit(EXIT_FAIL);
+        buf[numbytes] = '\0';
+
+        printf("client: received '%s'\n",buf);  
+
+        sleep(3);
     }
-
-    buf[numbytes] = '\0';
-
-    printf("client: received '%s'\n",buf);  
-
     close(sockfd);
 
     return 0;
