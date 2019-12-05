@@ -1,4 +1,17 @@
-CC=gcc
+CC=$(CROSS_COMPILE)gcc
 
-tmp102: tmp102.c
-	$(CC) -o tmp102 tmp102.c -Wall
+#LDFLAGS=-pthread -lrt
+OBJ = tmp102.o
+
+all: tmp102
+
+%.o: %.c $(DEPS)
+	$(CC) -g -Wall -c -o $@ $< $(CFLAGS)
+
+tmp102: $(OBJ)
+	$(CC) -g -Wall -o $@ $^ $(LDFLAGS)
+
+.PHONY: clean
+
+clean: 
+	rm tmp102 tmp102.o

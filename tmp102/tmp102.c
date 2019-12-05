@@ -1,5 +1,10 @@
-
-/* Pins P9_19 and P9_20 */
+/**
+*   @file : tmp102.c
+*   @function : interface temperature sensor (TMP102)   
+*
+*   @author : Ayush Dhoot
+*   @references : https://github.com/jbdatko/tmp102/blob/master/tmp102.c
+**/
 
 #include <errno.h>
 #include <string.h>
@@ -75,7 +80,6 @@ int main(){
 
      sleep(1);
    }
-
 
 
 }
