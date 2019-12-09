@@ -3,7 +3,7 @@ SRC = $(wildcard ./src/*.c)
 OBJ = $(SRC:.c=.o)
 
 ifeq ($(LDFLAGS), )
-	LDFLAGS = -pthread -lrt
+	LDFLAGS = -lpthread -lrt
 endif
 
 ifeq ($(CFLAGS), )
