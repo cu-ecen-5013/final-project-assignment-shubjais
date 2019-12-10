@@ -1,17 +1,27 @@
-CC=$(CROSS_COMPILE)gcc
+TARGET = client_socket
+SRC = $(wildcard *.c)
+OBJ = $(SRC:.c=.o)
 
-#LDFLAGS=-pthread -lrt
-OBJ = client-socket.o
+ifeq ($(LDFLAGS), )
+	LDFLAGS = -lpthread -lrt
+endif
 
-all: client-socket
+ifeq ($(CFLAGS), )
+	CFLAGS = -g -Wall -Werror
+endif
 
-%.o: %.c $(DEPS)
-	$(CC) -g -Wall -c -o $@ $< $(CFLAGS)
+ifeq ($(CC), ) 
+	CC = $(CROSS_COMPILE)gcc
+endif
 
-client-socket: $(OBJ)
-	$(CC) -g -Wall -o $@ $^ $(LDFLAGS)
+all: $(TARGET)
+
+$(TARGET): $(OBJ)
+	$(CC) $(CFLAGS) -o $@ $^ $(LDFLAGS)
+
+%.o: %.c
+	$(CC) $(CFLAGS) -o $@ -c $<
 
 .PHONY: clean
-
-clean: 
-	rm client-socket client-socket.o
+clean:
+	rm -f $(OBJ) $(TARGET)

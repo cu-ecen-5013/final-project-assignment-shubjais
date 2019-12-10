@@ -1,4 +1,4 @@
-TARGET = server-socket
+TARGET = server_socket
 SRC = $(wildcard ./src/*.c)
 OBJ = $(SRC:.c=.o)
 
