@@ -16,18 +16,38 @@
 #include <getopt.h>
 #include <string.h>
 #include <errno.h>
+#include <mqueue.h>
+#include <syslog.h>
+#include <sys/stat.h>
+#include <fcntl.h>
 
 #define LG_SUCCESS (0)
 #define LG_ERROR (1)
 
-#define LOG_ERR_AESD    1
-#define LOG_INFO_AESD   2
-#define LOG_ALERT_AESD  3
+#define LOG_ERR_AESD    "1:"
+#define LOG_INFO_AESD   "2:"
+#define LOG_ALERT_AESD  "3:"
 
-FILE *log_file;
+#define ERR_LEVEL       1
+#define INFO_LEVEL      2
+#define ALERT_LEVEL     3
+#define TRUE            0
+#define FALSE           1
 
-static void usage(char *);
 
-void data_logging(struct );
+#define MQ_SIZE (20)
+#define MSG_SIZE (1024)
+#define MQ_NAME "/aesdqueue"
+#define MQ_SUCCESS (0)
+#define MQ_ERROR (1)
+
+#define log_file        "/var/tmp/aesdchar"
+//#define log_file        "/dev/aesdchar"
+
+char msg[MSG_SIZE];
+char *msg_ptr;
+void usage(char *);
+
+void data_logging(int mode);
 
 #endif

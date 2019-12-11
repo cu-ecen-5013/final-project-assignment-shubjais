@@ -3,7 +3,7 @@ SRC = $(wildcard *.c)
 OBJ = $(SRC:.c=.o)
 
 ifeq ($(LDFLAGS), )
-	LDFLAGS = 
+	LDFLAGS = -lrt
 endif
 
 ifeq ($(CFLAGS), )
