@@ -2,11 +2,11 @@
 
 case "$1" in 
 	start)
-		echo "Starting aesdsocket server"
+		echo "Starting logger daemon"
 		start-stop-daemon -S -n logging -a /bin/logging -- -d
 		;;
 	stop)
-		echo "Stoping aesdsocket server"
+		echo "Stoping logger daemon"
 		start-stop-daemon -K -n logging
 		;;
 	*)

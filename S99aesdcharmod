@@ -15,7 +15,7 @@ function module_load
 		group="wheel"
 	fi
 
-	insmod ./$module.ko $* || exit 1
+	modprobe ./$module.ko $* || exit 1
 	major=$(awk "\$2==\"$module\" {print \$1}" /proc/devices)
 	rm -f /dev/${device}[0-2]
 
