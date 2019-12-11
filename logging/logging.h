@@ -41,8 +41,10 @@
 #define MQ_SUCCESS (0)
 #define MQ_ERROR (1)
 
-#define log_file        "/var/tmp/aesdchar"
-//#define log_file        "/dev/aesdchar"
+//#define log_file        "/var/tmp/aesdchar"
+#define log_err        "/dev/aesdchar0"
+#define log_info       "/dev/aesdchar1"
+#define log_alert      "/dev/aesdchar2"
 
 char msg[MSG_SIZE];
 char *msg_ptr;

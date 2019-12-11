@@ -18,13 +18,16 @@
 #include <time.h>
 #include "tempsens.h"
 
-#define PORT "9000" // the port client will be connecting to 
-#define MAXSIZE 1000 // max number of bytes we can get at once 
-#define EXIT_FAIL -1    //error code
-#define LOG_ERR_AESD "1:"
-#define LOG_INFO_AESD "2:"
-#define LOG_ALERT_AESD "3:"
-#define TEMP_THRESHOLD (30)
+#define PORT                "9000" // the port client will be connecting to 
+#define MAXSIZE             1000 // max number of bytes we can get at once 
+#define EXIT_FAIL           -1    //error code
+#define LOG_ERR_AESD        "1:"
+#define LOG_INFO_AESD       "2:"
+#define LOG_ALERT_AESD      "3:"
+#define TEMP_THRESHOLD_HIGH (30)
+#define TEMP_THRESHOLD_LOW  (20)
+
+#define SENSOR_NAME         "TMP102"
 
 int temp_raw;
 float C,F;

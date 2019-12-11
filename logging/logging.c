@@ -145,7 +145,7 @@ void data_logging(int mode)
 	{
 	case ERR_LEVEL :
 		{
-			FILE *fp = fopen(log_file ,"a");
+			FILE *fp = fopen(log_err ,"a");
 			fprintf(fp, "%s", msg_ptr);
 			fclose(fp);
 		}
@@ -153,7 +153,7 @@ void data_logging(int mode)
 
 	case INFO_LEVEL :
 		{
-			FILE *fp = fopen(log_file ,"a");
+			FILE *fp = fopen(log_info ,"a");
 			fprintf(fp, "%s", msg_ptr);
 			fclose(fp);
 		}
@@ -161,7 +161,7 @@ void data_logging(int mode)
 	
 	case ALERT_LEVEL :
 		{
-			FILE *fp = fopen(log_file ,"a");
+			FILE *fp = fopen(log_alert ,"a");
 			fprintf(fp, "%s", msg_ptr);
 			fclose(fp);
 		}

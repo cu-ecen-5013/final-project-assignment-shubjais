@@ -5,10 +5,13 @@
  * Based on the implementation of the "scull" device driver, found in
  * Linux Device Drivers example code.
  *
+ *
  * @author Dan Walkes
  * @Updated By: Shubham Jaiswal and Ayush Dhoot
  * @date 2019-12-09
  * @copyright Copyright (c) 2019
+ * 
+ * @reference : https://github.com/martinezjavier/ldd3/tree/master/scull
  *
  */
 
