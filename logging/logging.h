@@ -20,7 +20,14 @@
 #define LG_SUCCESS (0)
 #define LG_ERROR (1)
 
+#define LOG_ERR     0
+#define LOG_DATA    1
+#define LOG_ALERT   2
+
+FILE *log_file;
+
 static void usage(char *);
 
+void data_logging(struct );
 
 #endif

@@ -1,10 +1,12 @@
 /**
 *   @file : logging.c
-*   @function : create a logging function      
+*   @function : create a logging process   
 *
 *   @author : Ayush Dhoot
 *   @references : 
 **/
+
+#include "logging.h"
 
 int main(int argc, char *argv[])
 {
@@ -59,3 +61,44 @@ static void usage(char *exec_name)
 	printf("Usage: %s [-d]\n", exec_name);
 }
 
+void data_logging(struct log_data)
+{
+	switch (log_data.mode)
+	{
+	case LOG_ERR :
+		{
+			log_file = fopen(log_file ,"a");
+			fprintf(log_file, "%s	%s", . , . ); //Date  Time
+			fprintf(log_file, "	%s[%d]", . , . ); //Process name[pid]
+			fprintf(log_file, "	%s", .);	//Value
+			fprintf(log_file, "\n");
+			fclose(log_file);
+		}
+		break;
+
+	case LOG_DATA :
+		{
+			log_file = fopen(log_file ,"a");
+			fprintf(log_file, "%s	%s", . , . ); //Date  Time
+			fprintf(log_file, "	%s[%d]", . , . ); //Process name[pid]
+			fprintf(log_file, "	%s", .);	//Value
+			fprintf(log_file, "\n");
+			fclose(log_file);
+		}
+		break;
+	
+	case LOG_ALERT :
+		{
+			log_file = fopen(log_file ,"a");
+			fprintf(log_file, "%s	%s", . , . ); //Date  Time
+			fprintf(log_file, "	%s[%d]", . , . ); //Process name[pid]
+			fprintf(log_file, "	%s", .);	//Value
+			fprintf(log_file, "\n");
+			fclose(log_file);
+		}
+		break;
+
+	default:
+		break;
+	}
+}
