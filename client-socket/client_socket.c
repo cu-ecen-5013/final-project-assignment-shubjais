@@ -143,7 +143,7 @@ int main(int argc, char *argv[])
 
 		syslog( LOG_INFO, YEL "%s: client: received %s\n" RESET, __FILE__, buf);  
 
-		sleep(3);
+		sleep(5);
 	}
 	close(sockfd);
 
