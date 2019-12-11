@@ -236,6 +236,8 @@ void aesd_cleanup_module(void)
 	dev_t devno = MKDEV(aesd_major, aesd_minor);
 
 	cdev_del(&aesd_device.cdev);
+
+	kfree(aesd_device.buff);
 	
 	unregister_chrdev_region(devno, 1);
 }
