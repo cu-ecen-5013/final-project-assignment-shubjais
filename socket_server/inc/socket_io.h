@@ -60,7 +60,6 @@ typedef struct node
 	SLIST_ENTRY(node) nodes;
 }node_t;
 
-//pthread_mutex_t lock;
 /*---------------------------------------------------------------------------------------*/
 /*----------------------------------Function Definitions---------------------------------*/
 int socket_io(int sock_fd, int backlog);

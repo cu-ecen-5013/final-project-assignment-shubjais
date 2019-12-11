@@ -12,7 +12,6 @@
 #include <sys/stat.h>
 #include "../inc/socket_io.h"
 
-//#define FILE_PATH "/var/tmp/aesdsocketdata"
 #define LOGGER_QUEUE "/aesdqueue"
 /*---------------------------------------------------------------------------------------*/
 /*-----------------------------------Global Varibals-------------------------------------*/			
@@ -52,14 +51,6 @@ int socket_io(int sock_fd, int backlog)
 	node_t *node_ptr = NULL;
 	SLIST_HEAD(nodehead, node) head;
 	SLIST_INIT(&head);
-
-#ifndef USE_AESD_CHAR_DEVICE
-	//if(pthread_mutex_init(&lock, NULL) != 0)
-	//{
-	//	syslog(LOG_ERR, "%s: mutex init failed. %s\n", __FILE__, strerror(errno));
-	//	return SOCK_ERROR;
-	//}
-#endif
 
 	syslog(LOG_INFO, "%s: server: Waiting for connections.\n", __FILE__);
 	while(1)
@@ -114,15 +105,6 @@ void prc_closure(int sock_fd)
 	{
 		syslog(LOG_INFO, "%s:Closing Socket and deleting file!\n", __FILE__ );
 
-		//if(remove(FILE_PATH) == 0)
-		//{
-		//	syslog(LOG_INFO, "%s: File deleted successfully.\n", __FILE__);
-		//}
-		//else
-		//{
-		//	syslog(LOG_INFO, "%s: Error deleting file:%s\n", __FILE__, strerror(errno));
-		//	exit(SOCK_ERROR);
-		//}
 		if (mq_close (log_mq_des) == -1) {
 			syslog(LOG_ERR, "%s:mq_close:%s\n", __FILE__, strerror(errno));
 			exit (1);
@@ -141,29 +123,18 @@ void prc_closure(int sock_fd)
 
 void *thread_sock(void *args)
 {
-	//int fd, send_size = 0;
 	int send_size = 0;
 	data_t *arg_data = (data_t *)args;
 	char *s = arg_data->ip;
 	int new_fd = arg_data->s_new_fd; 
 	char *input_buffer_ptr = NULL, *read_buffer_ptr = NULL;
-	//off_t f_size = 0;
 	ssize_t ret, size;
 
 	syslog(LOG_DEBUG, "%s:Thread Id: %ld\n", __FILE__, arg_data->thread_id);
-	//syslog(LOG_INFO, "%s: FILE PATH: %s\n", __FILE__, FILE_PATH);
 	syslog(LOG_INFO, "%s: MESSAGE QUEUE NAME: %s\n", __FILE__, LOGGER_QUEUE);
 
 	while(1)
 	{
-		//fd = open(FILE_PATH, O_RDWR | O_APPEND | O_CREAT, 0664);
-		//if(fd == -1)
-		//{
-		//syslog(LOG_ERR, "%s: Error in opening file: %s\n", __FILE__, strerror(errno));
-		//exit(SOCK_ERROR);
-		//}
-
-		//syslog(LOG_INFO, "%s: File Descriptor: %d\n", __FILE__, fd);
 		read_buffer_ptr = (char *)calloc(SIZE, sizeof(char));
 		input_buffer_ptr = read_buffer_ptr;
 		size = SIZE;
@@ -204,87 +175,14 @@ void *thread_sock(void *args)
 			}
 		}
 
-		//input_buffer_ptr = read_buffer_ptr;
-
-		//pthread_mutex_lock(&lock);
-		//syslog(LOG_INFO, "%s:Entered Lock\n", __FILE__);
-		//while (send_size != 0 && (ret = write (fd, input_buffer_ptr, send_size)) != 0) 
-		//{
-		//	if (ret == -1) 
-		//	{
-		//		if (errno == EINTR)
-		//			continue;
-		//		syslog(LOG_ERR, "%s: write:%s\n", __FILE__, strerror(errno));
-		//		break;
-		//	}
-		//	send_size -= ret;
-		//	input_buffer_ptr += ret;
-		//}
-
-		//free(read_buffer_ptr);
-
-		//off_t curr_pos = lseek(fd, (off_t)0, SEEK_CUR);
-		//syslog(LOG_INFO,"%s:Current Position:%ld\n", __FILE__, curr_pos);
-		//f_size = lseek(fd, (off_t) 0, SEEK_END);
-		//if(f_size == (off_t)-1)
-		//{
-		//	syslog(LOG_ERR, "%s: lseek end:%s.\n", __FILE__, strerror(errno));
-		//	exit(SOCK_ERROR);
-		//}
-
-		//send_size = (int)f_size; //- curr_pos;
-
-		//ret = lseek(fd, (off_t)curr_pos, SEEK_SET);
-
-		//ret = lseek(fd, (off_t)0, SEEK_SET);
-		//if(ret == (off_t)-1)
-		//{
-		//	syslog(LOG_ERR, "%s: lseek start:%s.\n", __FILE__, strerror(errno));
-		//	exit(SOCK_ERROR);
-		//}
-
-		//syslog(LOG_INFO, "%s: Read size:%d.\n", __FILE__, send_size);
-
-		//read_buffer_ptr = (char *)calloc(send_size, sizeof(char));
-		//if(read_buffer_ptr == NULL)
-		//{
-		//	syslog(LOG_ERR, "%s: Error allocating memory for read.%s\n", __FILE__, strerror(errno));
-		//}
-
-		//input_buffer_ptr = read_buffer_ptr;
-
-		//while (send_size != 0 && (ret = read (fd, input_buffer_ptr, send_size)) != 0) 
-		//{
-		//	if (ret == -1) 
-		//	{
-		//		if (errno == EINTR)
-		//			continue;
-		//		syslog(LOG_ERR, "%s: read:%s\n", __FILE__, strerror(errno));
-		//		break;
-		//	}
-
-		//	send_size -= ret;
-		//	input_buffer_ptr += ret;
-		//}
-
-		//pthread_mutex_unlock(&lock);
-
-		//if(close(fd) == -1)
-		//{
-		//	syslog(LOG_ERR, "%s: Error closing %s file:%s\n", __FILE__, FILE_PATH, strerror(errno));
-		//	exit(SOCK_ERROR);
-		//}
-
-		//send_size = f_size; //- curr_pos;
-
 
 		if(mq_send(log_mq_des, read_buffer_ptr, send_size, 0) == -1)
 		{
 			syslog(LOG_ERR, "%s: mq_send:%s", __FILE__, strerror(errno));
-			
+
 		}
 
-
+		free(read_buffer_ptr);
 
 		send_size = strlen("Received!");
 		read_buffer_ptr = (char *)calloc(send_size, sizeof(char));
