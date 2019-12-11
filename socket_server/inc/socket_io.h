@@ -27,12 +27,20 @@
 #include <stdio.h>
 #include <signal.h>
 #include <time.h>
+#include <mqueue.h>
+
 
 #define SOCK_ERROR (-1)
 #define SOCK_SUCCESS (0)
 #define TRUE (1)
 #define FALSE (0)
 #define SIZE (100)
+
+#define MQ_SIZE (10)
+#define MSG_SIZE (1000)
+#define MQ_SUCCESS (0)
+#define MQ_ERROR (-1)
+
 /*---------------------------------------------------------------------------------------*/
 /*-----------------------------------Global Varibals-------------------------------------*/			
 extern volatile sig_atomic_t sigint_flag;
@@ -52,7 +60,7 @@ typedef struct node
 	SLIST_ENTRY(node) nodes;
 }node_t;
 
-pthread_mutex_t lock;
+//pthread_mutex_t lock;
 /*---------------------------------------------------------------------------------------*/
 /*----------------------------------Function Definitions---------------------------------*/
 int socket_io(int sock_fd, int backlog);
