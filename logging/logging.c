@@ -51,7 +51,7 @@ int main(int argc, char *argv[])
 		
 	}
 
-return SOCK_SUCCESS;
+return LG_SUCCESS;
 }
 
 
@@ -65,7 +65,7 @@ void data_logging(struct log_data)
 {
 	switch (log_data.mode)
 	{
-	case LOG_ERR :
+	case LOG_ERR_AESD :
 		{
 			log_file = fopen(log_file ,"a");
 			fprintf(log_file, "%s	%s", . , . ); //Date  Time
@@ -76,7 +76,7 @@ void data_logging(struct log_data)
 		}
 		break;
 
-	case LOG_DATA :
+	case LOG_INFO_AESD :
 		{
 			log_file = fopen(log_file ,"a");
 			fprintf(log_file, "%s	%s", . , . ); //Date  Time
@@ -87,7 +87,7 @@ void data_logging(struct log_data)
 		}
 		break;
 	
-	case LOG_ALERT :
+	case LOG_ALERT_AESD :
 		{
 			log_file = fopen(log_file ,"a");
 			fprintf(log_file, "%s	%s", . , . ); //Date  Time

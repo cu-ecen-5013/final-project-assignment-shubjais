@@ -96,12 +96,12 @@ int main(int argc, char *argv[])
 
 		if(temp_raw == SENSOR_FAILURE)
 		{
-			snprintf(buf, MAXSIZE, LOG_ERR_AESD"Cannot Communicate with sensor.\n");
-		}
+			snprintf(buf, MAXSIZE, LOG_ERR_AESD" %s: Cannot Communicate with sensor.\n", curr_time_s);
+		} 
 		else if (temp_raw == READ_ERROR)
 		{
-			snprintf(buf, MAXSIZE, LOG_ERR_AESD"Unable to read from sensor.\n");
-		}
+			snprintf(buf, MAXSIZE, LOG_ERR_AESD" %s: Unable to read from sensor.\n", curr_time_s);
+		} 
 		else
 		{
 			C = temp_raw * 0.0625;
@@ -109,11 +109,11 @@ int main(int argc, char *argv[])
 
 			if(C > TEMP_THRESHOLD)
 			{
-				snprintf(buf, MAXSIZE, LOG_ALERT_AESD"Temperature in F:%f and in C:%f\n", F, C);
+				snprintf(buf, MAXSIZE, LOG_ALERT_AESD" %s: Temperature in F:%f and in C:%f\n",curr_time_s, F, C);
 			}
 			else
 			{
-				snprintf(buf, MAXSIZE, LOG_INFO_AESD"Temperature in F:%f and in C: %f\n", F, C);
+				snprintf(buf, MAXSIZE, LOG_INFO_AESD" %s: Temperature in F:%f and in C: %f\n", curr_time_s, F, C);
 			}
 		}
 		len = strlen(buf);

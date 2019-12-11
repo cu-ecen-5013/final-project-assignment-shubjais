@@ -20,9 +20,9 @@
 #define LG_SUCCESS (0)
 #define LG_ERROR (1)
 
-#define LOG_ERR     0
-#define LOG_DATA    1
-#define LOG_ALERT   2
+#define LOG_ERR_AESD    1
+#define LOG_INFO_AESD   2
+#define LOG_ALERT_AESD  3
 
 FILE *log_file;
 
