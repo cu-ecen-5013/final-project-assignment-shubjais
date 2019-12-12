@@ -24,9 +24,9 @@
 #define LG_SUCCESS (0)
 #define LG_ERROR (1)
 
-#define LOG_ERR_AESD    "1:"
-#define LOG_INFO_AESD   "2:"
-#define LOG_ALERT_AESD  "3:"
+#define LOG_ERR_AESD    "1: "
+#define LOG_INFO_AESD   "2: "
+#define LOG_ALERT_AESD  "3: "
 
 #define ERR_LEVEL       1
 #define INFO_LEVEL      2
